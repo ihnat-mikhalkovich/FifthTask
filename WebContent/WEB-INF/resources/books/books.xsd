@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.epam.task05.com/books"
+        xmlns:tns="http://www.epam.task05.com/books">
+    <element name="catalog">
+        <complexType>
+            <sequence>
+                <element name="book" type="tns:Book" maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="Book">
+        <sequence>
+            <element name="author" type="string"/>
+            <element name="title" type="string"/>
+            <element name="genre" type="string"/>
+            <element name="price" type="double"/>
+            <element name="publish_date" type="date"/>
+        </sequence>
+        <attribute name="id">
+            <simpleType>
+                <restriction base="string">
+                    <pattern value="bk\d+"/>
+                </restriction>
+            </simpleType>
+        </attribute>
+    </complexType>
+</schema>
