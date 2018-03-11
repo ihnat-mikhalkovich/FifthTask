@@ -20,8 +20,6 @@ import by.epam.fifth_task.entity.Book;
 public class DOMXmlParser implements XmlParser {
 	
 	private String sourceFile;
-
-	private int pageNumber;
 	
 	private DocumentBuilder documentBuilder;
 	
@@ -45,23 +43,18 @@ public class DOMXmlParser implements XmlParser {
             e.printStackTrace();
         }
 	}
-	
-	@Override
-	public void setPageNumber(int pageNumber) {
-		this.pageNumber = pageNumber;		
-	}
 
 	@Override
-	public void buildPage(int selectedPage) {
-		pageNumber = selectedPage;
-		books.clear();
+	public void buildPage(int pageNumber) {
+//		books.clear();
 		int firstElement = (pageNumber - 1) * elementsPerPage;
         int lastElement = firstElement + elementsPerPage;
+        String primaryTagName = "book";
         Document document = null;
         try {
             document = documentBuilder.parse(sourceFile);
             Element root = document.getDocumentElement();
-            NodeList booksList = root.getElementsByTagName("book"); //change it
+            NodeList booksList = root.getElementsByTagName(primaryTagName);
             pageAmount = (int) Math.ceil((double) booksList.getLength()/elementsPerPage);
             for (int i = 0; i < booksList.getLength(); i++) {
                 Element bookElement = (Element) booksList.item(i);

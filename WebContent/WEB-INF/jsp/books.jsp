@@ -10,7 +10,6 @@
 <body>
 	<center>
 		<table border="1">
-			<caption><h2>Books</h2></caption>
 			<thead>
 			  	<tr>
 			    	<th>ID</th>

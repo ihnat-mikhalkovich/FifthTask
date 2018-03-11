@@ -19,8 +19,6 @@ public class StAXXmlParser implements XmlParser {
 		
 	private String sourceFile;
 	
-	private int pageNumber;
-	
 	private List<Book> books = new ArrayList<>();
 	
 	private int pageAmount;
@@ -32,15 +30,9 @@ public class StAXXmlParser implements XmlParser {
 	public StAXXmlParser() {
 		inputFactory = XMLInputFactory.newInstance();
 	}
-	
-	@Override
-	public void setPageNumber(int pageNumber) {
-		this.pageNumber = pageNumber;	
-	}
 
 	@Override
 	public void buildPage(int pageNumber) {
-		books.clear();
 		FileInputStream inputStream = null;
         XMLStreamReader reader = null;
         String name;
@@ -86,7 +78,8 @@ public class StAXXmlParser implements XmlParser {
             switch (type) {
                 case XMLStreamConstants.START_ELEMENT:
                     name = reader.getLocalName();
-                    switch (BookEnum.valueOf(name.toUpperCase())) {
+                    BookEnum bookEnum = BookEnum.valueOf(name.toUpperCase());
+                    switch (bookEnum) {
                         case AUTHOR:
                             book.setAuthor(getXMLText(reader));
                             break;
@@ -103,6 +96,8 @@ public class StAXXmlParser implements XmlParser {
                         case PUBLISH_DATE:
                             book.setPublish_date(getXMLText(reader));
                             break;
+                        default:
+                        	throw new XMLStreamException();
                     }
                     break;
                 case XMLStreamConstants.END_ELEMENT:

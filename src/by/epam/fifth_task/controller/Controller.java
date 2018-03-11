@@ -39,27 +39,18 @@ public class Controller extends HttpServlet {
 	}
 	
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
 		String parserType = request.getParameter("parserType");
 		String selectedPage = request.getParameter("selectedPage");
-		
-//		String sourceFile = "C:\\Users\\HOME\\eclipse-workspace\\FifthTask\\WebContent\\WEB-INF\\resources\\books\\books.xml";
-//		XmlParser domParser = new DOMXmlParser(sourceFile);
-//		domParser.setElementsPerPage(2);
-//		domParser.buildPage(Integer.parseInt(selectedPage)-1);
-//		int pagesAmount = domParser.getPageAmount();
-//		List<Book> books = domParser.getBooksPage();
 		
 		ServiceFactory factory = ServiceFactory.getInstance();
 		PageGiverService pageGiver = factory.getPageGiverService();
 		
 		pageGiver.setParserType(parserType);
 		List<Book> books = pageGiver.getPage(Integer.parseInt(selectedPage));
-		int pagesAmount = pageGiver.getPageAmount();
-		
+		int pagesAmount = pageGiver.getPageAmount();		
 			
-		Pagination pagination = new Pagination();
-		List<String> paginationList = pagination.paginating(Integer.parseInt(selectedPage), pagesAmount);
+		Pagination pagination = new Pagination(pagesAmount);
+		List<String> paginationList = pagination.paginating(Integer.parseInt(selectedPage));
 		
 		request.setAttribute("parserType", parserType);
 		request.setAttribute("selectedPage", selectedPage);
@@ -67,7 +58,7 @@ public class Controller extends HttpServlet {
 		request.setAttribute("paginationList", paginationList);
 		request.setAttribute("books", books);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/books.jsp"); // hide url
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/books.jsp");
 		dispatcher.forward(request, response);
 		
 	}

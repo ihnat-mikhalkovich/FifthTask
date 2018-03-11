@@ -7,9 +7,7 @@ import by.epam.fifth_task.entity.Book;
 public interface XmlParser {
 	
 	int DEFAULT_ELEMENTS_PER_PAGE = 4;
-	
-	void setPageNumber(int pageNumber);
-	
+		
 	void buildPage(int pageNumber);
 	
 	List<Book> getBooksPage();

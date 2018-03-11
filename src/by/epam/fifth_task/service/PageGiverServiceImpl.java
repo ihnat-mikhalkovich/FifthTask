@@ -49,7 +49,8 @@ public class PageGiverServiceImpl implements PageGiverService {
 		}
 		DAOFactory factory = DAOFactory.getInstance();
 		PageGiverDAO pageGiver = factory.getPageGiverDAO();
-		return pageGiver.setParserType(parserType);
+		pageGiver.setParserType(parserType);
+		return true;
 	}
 	
 }

@@ -14,6 +14,6 @@ public interface PageGiverDAO {
 	
 	int getPageAmount();
 	
-	boolean setParserType(String parserType);
+	void setParserType(String parserType);
 	
 }

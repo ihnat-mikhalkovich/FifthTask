@@ -12,8 +12,6 @@ import by.epam.fifth_task.entity.Book;
 
 public class SAXXmlParser implements XmlParser {
 	
-	private int pageNumber;
-	
 	private String sourceFile;
 
 	private List<Book> books;
@@ -27,12 +25,7 @@ public class SAXXmlParser implements XmlParser {
     private int elementsPerPage = XmlParser.DEFAULT_ELEMENTS_PER_PAGE;
 	
     public SAXXmlParser() {}
-    
-	@Override
-	public void setPageNumber(int pageNumber) {
-		this.pageNumber = pageNumber;		
-	}
-
+	
 	@Override
 	public void buildPage(int pageNumber) {
 		bh = new BookHandler();

@@ -130,16 +130,4 @@ public class Book {
 		return true;
 	}
 	
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id='" + id + '\'' +
-                ", author='" + author + '\'' +
-                ", title='" + title + '\'' +
-                ", genre='" + genre + '\'' +
-                ", price=" + price +
-                ", publish_date='" + publish_date + '\'' +
-                '}' + '\n';
-    }
-	
 }
