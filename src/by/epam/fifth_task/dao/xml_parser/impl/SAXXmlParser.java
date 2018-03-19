@@ -9,6 +9,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
 
 import by.epam.fifth_task.dao.xml_parser.XmlParser;
 import by.epam.fifth_task.entity.Book;
+import by.epam.fifth_task.exception.DAOException;
 
 public class SAXXmlParser implements XmlParser {
 	
@@ -27,20 +28,18 @@ public class SAXXmlParser implements XmlParser {
     public SAXXmlParser() {}
 	
 	@Override
-	public void buildPage(int pageNumber) {
+	public void buildPage(int pageNumber) throws DAOException {
 		bh = new BookHandler();
         try {
             reader = XMLReaderFactory.createXMLReader();
             reader.setContentHandler(bh);
         } catch (SAXException e) {
-            e.printStackTrace();
+        	throw new DAOException("SAX parser is broken.", e);
         }
 		try {
             reader.parse(sourceFile);
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (SAXException | IOException e) {
+        	throw new DAOException("SAX parser is broken.", e);
         }
         books = bh.getBooks();
         int firstBookOfPage = elementsPerPage * (pageNumber - 1);

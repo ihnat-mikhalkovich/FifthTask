@@ -16,6 +16,7 @@ import org.xml.sax.SAXException;
 
 import by.epam.fifth_task.dao.xml_parser.XmlParser;
 import by.epam.fifth_task.entity.Book;
+import by.epam.fifth_task.exception.DAOException;
 
 public class DOMXmlParser implements XmlParser {
 	
@@ -45,8 +46,7 @@ public class DOMXmlParser implements XmlParser {
 	}
 
 	@Override
-	public void buildPage(int pageNumber) {
-//		books.clear();
+	public void buildPage(int pageNumber) throws DAOException {
 		int firstElement = (pageNumber - 1) * elementsPerPage;
         int lastElement = firstElement + elementsPerPage;
         String primaryTagName = "book";
@@ -63,10 +63,8 @@ public class DOMXmlParser implements XmlParser {
                     books.add(book);
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
+        } catch (IOException | SAXException e) {
+            throw new DAOException("DOM parser is broken.", e);
         }
 	}
 	

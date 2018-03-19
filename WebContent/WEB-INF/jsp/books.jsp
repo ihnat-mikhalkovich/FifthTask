@@ -8,6 +8,7 @@
 <title>books</title>
 </head>
 <body>
+	
 	<center>
 		<table border="1">
 			<thead>
@@ -35,14 +36,14 @@
 		</table>
 		
 		<c:forEach var="elem" items="${ requestScope.paginationList }" varStatus="status">
-			<c:set var="dots" value="..." scope="page"/>
+			<c:set var="intermediateSymbols" value="${ requestScope.intermediateSymbolsOfPagination }" scope="page"/>
 			<c:choose>
-				<c:when test="${ !(elem eq dots) }">
-					<a href='Controller?selectedPage=${ elem }&parserType=${ requestScope.parserType }'>${ elem }</a>
+				<c:when test="${ !(elem eq intermediateSymbols) }">
+					<a href="Controller?selectedPage=${ elem }&parserType=${ requestScope.parserType }">${ elem }</a>
 					<c:out value=" "/>
 				</c:when>
 				<c:otherwise>
-					<c:out value="..."/>
+					<c:out value="${ requestScope.intermediateSymbolsOfPagination }"/>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>

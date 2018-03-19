@@ -14,6 +14,7 @@ import javax.xml.stream.XMLStreamReader;
 
 import by.epam.fifth_task.dao.xml_parser.XmlParser;
 import by.epam.fifth_task.entity.Book;
+import by.epam.fifth_task.exception.DAOException;
 
 public class StAXXmlParser implements XmlParser {
 		
@@ -32,7 +33,7 @@ public class StAXXmlParser implements XmlParser {
 	}
 
 	@Override
-	public void buildPage(int pageNumber) {
+	public void buildPage(int pageNumber) throws DAOException {
 		FileInputStream inputStream = null;
         XMLStreamReader reader = null;
         String name;
@@ -49,17 +50,15 @@ public class StAXXmlParser implements XmlParser {
                     }
                 }
             }
-        } catch (XMLStreamException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
+        } catch (XMLStreamException | FileNotFoundException e) {
+        	throw new DAOException("StAX parser is broken.", e);
+        }finally {
             try {
                 if (inputStream != null) {
                     inputStream.close();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+            	throw new DAOException("StAX parser is broken.", e);
             }
         }
         int firstBookOfPage = elementsPerPage * (pageNumber - 1);

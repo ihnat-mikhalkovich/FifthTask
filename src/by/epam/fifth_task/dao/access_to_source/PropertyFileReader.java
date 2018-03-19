@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import by.epam.fifth_task.exception.DAOException;
+
 public class PropertyFileReader {
 	
 	private String propertyFileLocation;
@@ -15,7 +17,7 @@ public class PropertyFileReader {
 		this.propertyFileLocation = propertyFileLocation.getSourceFileLocation();
 	}
 	
-	public String getPathOfSourceFile(SourceTypeEnum sourceType) {
+	public String getPathOfSourceFile(SourceTypeEnum sourceType) throws DAOException {
 		try (FileReader fileReader = new FileReader(propertyFileLocation);
 				BufferedReader bufferedReader = new BufferedReader(fileReader)) {
 			String lineOfPropertyFile = null;
@@ -28,7 +30,7 @@ public class PropertyFileReader {
 				}
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new DAOException("Propetry file location is wrong.", e);
 		}
 		return null;
 	}
