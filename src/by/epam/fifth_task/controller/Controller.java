@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import by.epam.fifth_task.business_logic.Pagination;
 import by.epam.fifth_task.entity.Book;
 import by.epam.fifth_task.exception.ServiceException;
 import by.epam.fifth_task.service.PageGiverService;
@@ -54,15 +53,11 @@ public class Controller extends HttpServlet {
 			e.printStackTrace();
 		}
 		int pagesAmount = pageGiver.getPageAmount();
-			
-		Pagination pagination = new Pagination(pagesAmount);
-		List<String> paginationList = pagination.paginating(Integer.parseInt(selectedPage));
-		String intermediateSymbolsOfPagination = pagination.getIntermediateSymbols();
 		
-		request.setAttribute("intermediateSymbolsOfPagination", intermediateSymbolsOfPagination);
 		request.setAttribute("parserType", parserType);
-		request.setAttribute("paginationList", paginationList);
 		request.setAttribute("books", books);
+		request.setAttribute("pagesAmount", pagesAmount);
+		request.setAttribute("currentPage", selectedPage);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/books.jsp");
 		dispatcher.forward(request, response);

@@ -1,10 +1,6 @@
 package by.epam.fifth_task.dao.impl;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import by.epam.fifth_task.dao.PageGiverDAO;
 import by.epam.fifth_task.dao.access_to_source.PropertyFileReader;
@@ -23,25 +19,12 @@ public class PageGiverDAOImpl implements PageGiverDAO {
 	
 	private SourceTypeEnum sourceType = SourceTypeEnum.BOOKS;
 	
-	private static final Logger daoLogger = Logger.getLogger("com.ihnat.mikhalkovich.dao");
-	
 	{
 		PropertyFileReader propertyReader = new PropertyFileReader();
 		try {
 			sourceFile = propertyReader.getPathOfSourceFile(sourceType);
 		} catch (DAOException e) {
-			daoLogger.setLevel(Level.SEVERE);
-			FileHandler fileHandler = null;
-			try {
-				fileHandler = new FileHandler("/FifthTask/WebContent/WEB-INF/log/daoLog01.log", true);
-		        daoLogger.addHandler(fileHandler);
-		        daoLogger.log(Level.SEVERE, "Source file not found.", e);
-			} catch (IOException ex) {
-				Logger.getGlobal().warning("daolog01.log file is bed.");
-			} finally {
-				fileHandler.close();
-			}
-	        
+			e.printStackTrace();
 		}
 	}
 	

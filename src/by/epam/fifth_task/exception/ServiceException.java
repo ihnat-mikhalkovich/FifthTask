@@ -23,6 +23,4 @@ public class ServiceException extends Exception {
 		super(arg0);
 	}
 	
-	
-	
 }
