@@ -5,34 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>home</title>
-<style type="text/css">
-html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-.parent {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    overflow: auto;
-}
-
-.block {
-    width: 65px;
-    height: 100px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-}
+<style>
+	<%@include file="/WEB-INF/css/style.css"%>
 </style>
 </head>
 <body>

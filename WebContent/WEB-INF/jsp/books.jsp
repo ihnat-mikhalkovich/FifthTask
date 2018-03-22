@@ -6,9 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>books</title>
+<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
 </head>
 <body>
-	
 	<center>
 		<table border="1">
 			<thead>
@@ -35,49 +35,10 @@
 		  	</tbody>
 		</table>
 		
-		<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
-		
 		<script type="text/javascript">
-			function pagination(current, last, intermediateSymbols) {
-			    var delta = 2,
-			        left = current - delta,
-			        right = current + delta + 1,
-			        range = [],
-			        rangeWithIntermediateSymbols = [],
-			        l;
-	
-			    for (let i = 1; i <= last; i++) {
-			        if (i == 1 || i == last || i >= left && i < right) {
-			            range.push(i);
-			        }
-			    }
-	
-			    for (let i of range) {
-			        if (l) {
-			            if (i - l === 2) {
-			            	rangeWithIntermediateSymbols.push(l + 1);
-			            } else if (i - l !== 1) {
-			            	rangeWithIntermediateSymbols.push(intermediateSymbols);
-			            }
-			        }
-			        rangeWithIntermediateSymbols.push(i);
-			        l = i;
-			    }
-	
-			    return rangeWithIntermediateSymbols;
-			}
-		</script>
-				
-		<script type="text/javascript">
+			<%@include file="../js/pagination.js"%>
 			var intermediateSymbols = "...";
-			var paginationList = pagination(${ requestScope.currentPage }, ${ requestScope.pagesAmount }, intermediateSymbols);
-			for (var i = 0; i < paginationList.length; i++) {
-				if (!(paginationList[i] == intermediateSymbols)) {
-					$("center").append("<a href=\"Controller?selectedPage=" + paginationList[i] + "&parserType=" + "${ requestScope.parserType }" + "\">" + paginationList[i] + "</a>&nbsp;");	
-				} else {
-					$("center").append(intermediateSymbols + "&nbsp;");
-				}
-			}
+			paginationWithLinks(${ requestScope.currentPage }, ${ requestScope.pagesAmount }, intermediateSymbols);
 		</script>
 		
 	</center>
