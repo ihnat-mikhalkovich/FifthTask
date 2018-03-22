@@ -28,7 +28,6 @@ function pagination(current, last, intermediateSymbols) {
 }
 
 function paginationWithLinks(current, last, intermediateSymbols) {
-	var intermediateSymbols = "...";
 	var paginationList = pagination(current, last, intermediateSymbols);
 	for (var i = 0; i < paginationList.length; i++) {
 		if (!(paginationList[i] == intermediateSymbols)) {
