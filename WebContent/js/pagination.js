@@ -27,11 +27,11 @@ function pagination(current, last, intermediateSymbols) {
     return rangeWithIntermediateSymbols;
 }
 
-function paginationWithLinks(current, last, intermediateSymbols) {
+function paginationWithLinks(current, last, intermediateSymbols, parserType) {
 	var paginationList = pagination(current, last, intermediateSymbols);
 	for (var i = 0; i < paginationList.length; i++) {
 		if (!(paginationList[i] == intermediateSymbols)) {
-			$("center").append("<a href=\"Controller?selectedPage=" + paginationList[i] + "&parserType=" + "${ requestScope.parserType }" + "\">" + paginationList[i] + "</a>&nbsp;");	
+			$("center").append("<a href=\"Controller?selectedPage=" + paginationList[i] + "&parserType=" + parserType + "\">" + paginationList[i] + "</a>&nbsp;");	
 		} else {
 			$("center").append(intermediateSymbols + "&nbsp;");
 		}

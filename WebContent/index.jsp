@@ -5,9 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>home</title>
-<style>
-	<%@include file="/WEB-INF/css/style.css"%>
-</style>
+<link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 	<div class="parant">

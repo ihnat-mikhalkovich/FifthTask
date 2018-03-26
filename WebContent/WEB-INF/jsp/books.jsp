@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>books</title>
 <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+<script src="js/pagination.js"></script>
 </head>
 <body>
 	<center>
@@ -36,10 +37,12 @@
 		</table>
 		
 		<script type="text/javascript">
-			<%@include file="../js/pagination.js"%>
 			var intermediateSymbols = "...";
-			paginationWithLinks(${ requestScope.currentPage }, ${ requestScope.pagesAmount }, intermediateSymbols);
-		</script>
+			var current = ${ requestScope.currentPage };
+			var last = ${ requestScope.pagesAmount };
+			var parserType = "${ requestScope.parserType }";
+			paginationWithLinks(current, last, intermediateSymbols, parserType);
+		</script>		
 		
 	</center>
 </body>
